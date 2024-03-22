@@ -1,8 +1,17 @@
+## Overview
+
+Experimenting with `System.IO.Pipelines` to efficiently parse large CSV files, while also evaluating its performance against other parsing techniques. Implementation is based on [this article](https://www.codemag.com/article/2403091).  
+Added a few more approaches and benchmarks for each one.
+
+## Benchmarks
+
+```
 BenchmarkDotNet v0.13.12, Windows 11 (10.0.22631.3155/23H2/2023Update/SunValley3)  
 11th Gen Intel Core i7-11800H 2.30GHz, 1 CPU, 16 logical and 8 physical cores  
 .NET SDK 8.0.203  
 [Host]     : .NET 8.0.3 (8.0.324.11423), X64 RyuJIT AVX-512F+CD+BW+DQ+VL+VBMI  
 DefaultJob : .NET 8.0.3 (8.0.324.11423), X64 RyuJIT AVX-512F+CD+BW+DQ+VL+VBMI
+```
 
 
 | Method               | Mean     | Error    | StdDev   | Ratio        | Gen0        | Gen1        | Gen2       | Allocated   | Alloc Ratio |
