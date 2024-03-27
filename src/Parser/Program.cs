@@ -5,12 +5,15 @@ using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Reports;
 using BenchmarkDotNet.Running;
 using Parser;
+using Directory = Parser.Directory;
 
-// var filePath = @"C:\Repos\pipelines-csv\data.csv.gz";
-// using var streamReader = new StreamReader(filePath);
-// var a = await StreamProcessor.AggregateUserDataWithSpan(streamReader.BaseStream);
-//
-// Console.WriteLine("end");
+#if DEBUG
+
+var filePath = Directory.GetTestDataFilePath();
+using var streamReader = new StreamReader(filePath);
+var data = await Utf8StreamProcessor.AggregateUserData(streamReader.BaseStream);
+
+#else
 
 var config = DefaultConfig.Instance
     .WithSummaryStyle(SummaryStyle.Default.WithRatioStyle(RatioStyle.Trend))
@@ -18,4 +21,4 @@ var config = DefaultConfig.Instance
 
 BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args, config);
 
-
+#endif
